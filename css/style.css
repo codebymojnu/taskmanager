@@ -1,0 +1,81 @@
+body {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: lightgray;
+}
+
+h2 {
+    text-align: center;
+}
+button {
+    cursor: pointer;
+}
+
+.input-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 80px;
+    margin: 20px;
+    width: 90%;
+    padding: 10px;
+    background-color: white;
+}
+
+.input-area input {
+    width: 80%;
+    height: 24px;
+    font-size: 1.3em;
+    padding: 2px;
+}
+
+.input-area button {
+    background-color: #2098D1;
+    color: white;
+    padding: 3px;
+    width: 17%;
+    margin: 10px;
+    font-size: 1.3em;
+    border: 1px solid #2098D1;
+}
+
+.task-area .card{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 80px;
+    margin: 20px;
+    width: 90%;
+    padding: 10px;
+    background-color: white;
+    font-size: 1.2em;
+}
+
+.card button{
+    padding: 7px;
+    font-size: 16px;
+}
+
+#completeBtn{
+    background-color: #2DBF64;
+    color: #FFF7F6;
+    border: 1px solid #2DBF64;
+}
+
+#editBtn{
+    background-color: #E8910D;
+    color: #FFFFFF;
+    border: 1px solid #E8910D;
+}
+
+#deleteBtn{
+    background-color: #ED5650;
+    color: #FFFFFF;
+    border: 1px solid #ED5650;
+}
+.task div{
+    width: 30%;
+}
+.task {
+    width: 60%;
+}
