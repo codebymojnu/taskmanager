@@ -2,7 +2,7 @@ document.querySelector('#btn').addEventListener('click', function () {
     const task = document.querySelector('#task').value;
     const today = new Date().toLocaleString();
     const taskCondition = 'incomplete';
-    const taskInfo = { task: task, date: today, condition: taskCondition};
+    const taskInfo = { task: task, date: today, condition: taskCondition };
     postToServer(taskInfo);
 })
 
@@ -39,10 +39,10 @@ function loadData() {
 // Display LOADER/SPINNER When backend data isn't ready
 
 function loader(show) {
-    if(show){
+    if (show) {
         document.querySelector('.loader').style.display = 'flex';
     }
-    else{
+    else {
         document.querySelector('.loader').style.display = 'none';
     }
 }
@@ -66,10 +66,10 @@ function showUI(data) {
                           
                            
                                 <button onClick="deleteTask(${i}, '${_id}')" id="deleteBtn">Delete</button>
-                       
+    
                         </div>`
         document.querySelector('.task-area').appendChild(div);
-        if(condition === 'complete'){
+        if (condition === 'complete') {
             document.querySelector(`.task${i}`).style.textDecorationLine = 'line-through';
         }
     }
@@ -98,7 +98,7 @@ function showSingleItemUI(data) {
     document.querySelector('.container').style.display = 'none';
     const { task, _id, condition } = data;
     const div = document.createElement('div');
-    div.innerHTML = `<div class="input-area">
+    div.innerHTML = `<div>
         <input name="updateTask" id="updateTask" value="${task}">
         <input name="updateCondition" id="updateCondition" value="${condition}">
         <button id="btnUpdate" onClick="updateValue('${_id}')">Update</button>
