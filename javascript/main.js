@@ -1,7 +1,8 @@
 document.querySelector('#btn').addEventListener('click', function () {
     const task = document.querySelector('#task').value;
     const today = new Date().toLocaleString();
-    const taskInfo = { task: task, date: today };
+    const taskCondition = 'incomplete';
+    const taskInfo = { task: task, date: today, condition: taskCondition};
     postToServer(taskInfo);
 })
 
@@ -26,6 +27,7 @@ function postToServer(postInfo) {
 // read data
 
 function loadData() {
+    loader(true);
     fetch('https://rocky-hollows-69892.herokuapp.com/api/tasks')
         .then(response => response.json())
         .then(data => {
@@ -34,19 +36,30 @@ function loadData() {
         })
 }
 
+// Display LOADER/SPINNER When backend data isn't ready
+
+function loader(show) {
+    if(show){
+        document.querySelector('.loader').style.display = 'flex';
+    }
+    else{
+        document.querySelector('.loader').style.display = 'none';
+    }
+}
 // data show on UI
 
 function showUI(data) {
     for (let i = 0; i < data.length; i++) {
-        const { task, _id, date } = data[i];
+        const { task, _id, date, condition } = data[i];
         //console.log(typeof (_id));
         const div = document.createElement('div');
         div.innerHTML = `<div class="card card${i}">
-                            <div class="task task${i}">${task}
+                            <div class="task task${i}">${task}</div>
+                            <div class="date">
                                 <small>${date}</small>
                             </div>
                             <div>
-                                <button onClick="completeTask(${i})" id="completeBtn">Complete</button>
+                                <button onClick="completeTask('${_id}')" id="completeBtn">Complete</button>
                             </div>
                             <div>
                                 <button onClick="loadSingleItem('${_id}')" id="editBtn">Edit</button>
@@ -56,7 +69,11 @@ function showUI(data) {
                             </div>
                         </div>`
         document.querySelector('.task-area').appendChild(div);
+        if(condition === 'complete'){
+            document.querySelector(`.task${i}`).style.textDecorationLine = 'line-through';
+        }
     }
+    loader(false);
 }
 
 // delete data
@@ -79,11 +96,12 @@ function deleteTask(i, id) {
 
 function showSingleItemUI(data) {
     document.querySelector('.container').style.display = 'none';
-    const { task, _id } = data;
+    const { task, _id, condition } = data;
     const div = document.createElement('div');
     div.innerHTML = `<div class="input-area">
-    <input name="updateTask" id="updateTask" value="${task}">
-    <button id="btnUpdate" onClick="updateValue('${_id}')">Update</button>
+        <input name="updateTask" id="updateTask" value="${task}">
+        <input name="updateCondition" id="updateCondition" value="${condition}">
+        <button id="btnUpdate" onClick="updateValue('${_id}')">Update</button>
 </div>`
     document.querySelector('body').appendChild(div);
 }
@@ -102,15 +120,16 @@ function loadSingleItem(id) {
 
 function updateValue(id) {
     const updatedTask = document.querySelector('#updateTask').value;
-    const updatedData = { task: updatedTask };
+    const updatedCondition = document.querySelector('#updateCondition').value
+    const updatedData = { task: updatedTask, condition: updatedCondition };
     updateDocument(id, updatedData);
 }
 
-function updateDocument(id, updatedData) {
+function updateDocument(id, updatedTask) {
     fetch(`https://rocky-hollows-69892.herokuapp.com/update/${id}`, {
         method: 'PATCH',
         headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify(updatedData)
+        body: JSON.stringify(updatedTask)
     })
         .then(res => res.json())
         .then(result => {
@@ -122,8 +141,10 @@ function updateDocument(id, updatedData) {
 
 // Hit Complete Button // 
 
-function completeTask(i) {
-    document.querySelector(`.task${i}`).style.textDecorationLine = 'line-through';
+function completeTask(id) {
+    const taskCondition = 'complete';
+    const updatedTask = { condition: taskCondition };
+    updateDocument(id, updatedTask);
 }
 loadData();
 
