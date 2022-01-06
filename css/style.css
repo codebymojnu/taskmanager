@@ -114,6 +114,9 @@ button {
     h2 {
       display: none;
     }
+    .input-area{
+        margin: 7px;
+    }
     .input-area input{
         width: 60%;
     }
@@ -122,8 +125,9 @@ button {
     }
     .task-area .card{
         display: block;
-        margin: 20px 1px 20px 1px;
-        width: 98%;
+        margin: 20px 3px 20px 3px;
+        width: 97%;
+        height: 90px;
         padding: 3px;
         font-size: 16px;
     }
@@ -132,7 +136,7 @@ button {
         display: block;
     }
     #completeBtn, #editBtn, #deleteBtn{
-        margin-top: 7px;
+        margin-top: 8px;
         display: inline-block;
     }
     #completeBtn{
