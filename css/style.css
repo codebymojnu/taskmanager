@@ -109,3 +109,33 @@ button {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  @media screen and (max-width: 480px) {
+    h2 {
+      display: none;
+    }
+    .input-area input{
+        width: 60%;
+    }
+    .input-area button{
+        width: 30%;
+    }
+    .task-area .card{
+        display: block;
+        margin: 20px 1px 20px 1px;
+        width: 98%;
+        padding: 3px;
+        font-size: 16px;
+    }
+    .task{
+        width: 100%;
+        display: block;
+    }
+    #completeBtn, #editBtn, #deleteBtn{
+        margin-top: 7px;
+        display: inline-block;
+    }
+    #completeBtn{
+        margin-left: 25%;
+    }
+  }

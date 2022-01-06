@@ -58,15 +58,15 @@ function showUI(data) {
                             <div class="date">
                                 <small>${date}</small>
                             </div>
-                            <div>
+                         
                                 <button onClick="completeTask('${_id}')" id="completeBtn">Complete</button>
-                            </div>
-                            <div>
+                          
+                         
                                 <button onClick="loadSingleItem('${_id}')" id="editBtn">Edit</button>
-                            </div>
-                            <div>
+                          
+                           
                                 <button onClick="deleteTask(${i}, '${_id}')" id="deleteBtn">Delete</button>
-                            </div>
+                       
                         </div>`
         document.querySelector('.task-area').appendChild(div);
         if(condition === 'complete'){
