@@ -1,12 +1,105 @@
+/* // handle sign in click
+
+* document.querySelector('.signInBtn').addEventListener('click', function () {
+*    document.querySelector('.registrationForm').style.display = 'none';
+*     document.querySelector('.signInArea').style.display = 'block';
+* })
+
+* // Hit registration Button
+
+* document.querySelector('.registerBtn').addEventListener('click', function(){
+*     document.querySelector('.signInArea').style.display = 'none';
+*    document.querySelector('.registrationForm').style.display = 'block';
+* })
+
+* Handle Registration
+
+*/
+
+let userJSONdata = localStorage.getItem('user');
+const user = JSON.parse(userJSONdata);
+let email = user.email;
+
+if(userJSONdata === null){
+    console.log(0);
+}
+else{
+    document.querySelector('.registrationArea').style.display = 'none';
+    loadData();
+}
+
+function handleRegistration(){
+    const email = document.querySelector('#email').value;
+    // const password = document.querySelector('#password').value;
+    // const repeatPassword = document.querySelector('#psw-repeat').value;
+    const user = {email: email};
+    const rgx =  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(!rgx.test(email)){
+        document.querySelector('.emailWarning').innerHTML = 'Enter a valid email';
+    }
+    else{
+       postUserInfo(user);
+       localStorage.setItem('user', JSON.stringify(user));
+       document.querySelector('.registrationArea').style.display = 'none';
+       window.location.reload(false);
+       document.querySelector('.container').style.display = 'block';
+    }
+}
+
+// POST USER information to server
+
+function postUserInfo(postUserInfo) {
+    fetch('http://localhost:5000/addUser', {
+        method: 'POST',
+        body: JSON.stringify(postUserInfo),
+        headers: {
+            "Content-type": "application/json;charset=UTF-8"
+        }
+    })
+        .then(res => res.json())
+        .then(result => {
+            if (result) {
+                console.log(result);
+            }
+        })
+}
+
+// When user Click login button
+
+// document.querySelector('.loginBtn').addEventListener('click', function(){
+//     const email = document.querySelector('#signInEmail').value;
+//     const password = document.querySelector('#signInPassword').value;
+//     const user = {email: email, password: password};
+//     postLoginInfo(user);
+// })
+
+// function postLoginInfo(loginInfo){
+//     fetch('http://localhost:5000/users/login', {
+//         method: 'POST',
+//         body: JSON.stringify(loginInfo),
+//         headers: {
+//             "Content-type": "application/json;charset=UTF-8"
+//         }
+//     })
+//         .then(res => res.json())
+//         .then(result => {
+//             if (result) {
+//                 window.location.reload();
+//             }
+//         })
+// }
+
+// When user click ADD TASK button
+
 document.querySelector('#btn').addEventListener('click', function () {
     const task = document.querySelector('#task').value;
     const today = new Date().toLocaleString();
     const taskCondition = 'incomplete';
-    const taskInfo = { task: task, date: today, condition: taskCondition };
+    const taskInfo = { task: task, date: today, condition: taskCondition, email: email };
     postToServer(taskInfo);
 })
 
-// post data
+// post task 
 
 function postToServer(postInfo) {
     fetch('https://rocky-hollows-69892.herokuapp.com/addTask', {
@@ -28,7 +121,8 @@ function postToServer(postInfo) {
 
 function loadData() {
     loader(true);
-    fetch('https://rocky-hollows-69892.herokuapp.com/api/tasks')
+    document.querySelector('.container').style.display = 'block';
+    fetch(`https://rocky-hollows-69892.herokuapp.com/api/tasks/${email}`)
         .then(response => response.json())
         .then(data => {
             data.reverse();
@@ -146,5 +240,6 @@ function completeTask(id) {
     const updatedTask = { condition: taskCondition };
     updateDocument(id, updatedTask);
 }
-loadData();
+
+
 

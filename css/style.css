@@ -4,6 +4,10 @@ body {
     background-color: lightgray;
 }
 
+.container {
+    display: none;
+}
+
 h2 {
     text-align: center;
 }
@@ -127,6 +131,59 @@ button {
     font-size: 18px;
 }
 
+/* For Registration Form Only */
+
+/* Add padding to containers */
+.form-container {
+    padding: 25px;
+    margin: 20px;
+    background-color: white;
+    width: 90%;
+  }
+  .form-container input, .signInArea input{
+      width: 97%;
+      margin-top: 4px;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 0;
+      border-bottom: 1px solid black;
+  }
+  .form-container input:focus, .signInArea input:focus{
+      outline: none;
+  }
+
+  .registrationBtn, .registerBtn, .loginBtn{
+      padding: 15px;
+      color: #FFFFFF;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+      font-size: 1.1em;
+      border: none;
+      font-weight: bold;
+  }
+  .registrationBtn:hover, .loginBtn{
+      opacity: 1;
+  }
+  .loginBtn{
+      background-color: #166FE5;
+  }
+  /* Full-width input fields */
+ 
+  /* Sign in Area */
+  .signInArea {
+      margin-top: 80px;
+      display: none;
+  }
+
+  .registrationBtn{
+    background-color: #166FE5;
+    cursor: pointer;
+}
+  .signInBtn:hover{
+    color: #166FE5;
+    cursor: pointer;
+}
   @media screen and (max-width: 480px) {
     h2 {
       display: none;
@@ -159,4 +216,10 @@ button {
     #completeBtn{
         margin-left: 25%;
     }
+    .form-container {
+        padding: 7px;
+        margin: 20px 4px 20px 4px;
+        background-color: white;
+        width: 96%;
+      }
   }
