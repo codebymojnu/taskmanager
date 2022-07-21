@@ -8,9 +8,7 @@ body {
     display: none;
 }
 
-h2 {
-    text-align: center;
-}
+
 button {
     cursor: pointer;
 }
@@ -185,17 +183,19 @@ button {
     cursor: pointer;
 }
   @media screen and (max-width: 480px) {
-    h2 {
-      display: none;
-    }
     .input-area{
         margin: 7px;
+        display: block;
+        height: 136px;
     }
     .input-area input{
-        width: 60%;
+        width: 99%;
+        display: block;
+        margin-bottom: 10px;
     }
     .input-area button{
         width: 30%;
+        margin-left: 0;
     }
     .task-area .card{
         display: block;

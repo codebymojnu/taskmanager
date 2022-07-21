@@ -49,7 +49,7 @@ function handleRegistration(){
 // POST USER information to server
 
 function postUserInfo(postUserInfo) {
-    fetch('http://localhost:5000/addUser', {
+    fetch('https://rocky-hollows-69892.herokuapp.com/addUser', {
         method: 'POST',
         body: JSON.stringify(postUserInfo),
         headers: {
